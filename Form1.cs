@@ -97,12 +97,6 @@ namespace SenkiSaveEditor
             statTextBox.Text = _currentCharInfo.Stats[StIdx].ToString();
         }
 
-        //private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        //{
-        //    _currentCharIndex = Convert.ToInt32(numericUpDown1.Value);
-        //    UpdateGeStTextBoxes();
-        //}
-
         private void UpdateGeStTextBoxes()
         {
             var charInfo = Savedata.GetCharacterInfo(_currentCharIndex);
@@ -114,8 +108,6 @@ namespace SenkiSaveEditor
 
             for (int i = 0; i < StatsTextBoxes.Length; i++)
                 StatsTextBoxes[i].Text = _currentCharInfo.Stats[i].ToString();
-
-            //lblCharName.Text = Savedata.CharacterDescriptions[_currentCharIndex];
             
         }
 
@@ -132,7 +124,7 @@ namespace SenkiSaveEditor
             label2.Text = _savedatafile;
             lstChar.SelectedIndex = -1;
             TextBoxesSetEnabledState(false);
-            //UpdateGeStTextBoxes();
+            TextBoxesClearAll();
         }
 
         private void TextBoxesSetEnabledState(bool v)
@@ -141,6 +133,14 @@ namespace SenkiSaveEditor
                 g.Enabled = v;
             foreach (var s in StatsTextBoxes)
                 s.Enabled = v;
+        }
+
+        private void TextBoxesClearAll()
+        {
+            foreach (var g in GeneralInfoTextBoxes)
+                g.Clear();
+            foreach (var s in StatsTextBoxes)
+                s.Clear();
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
