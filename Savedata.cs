@@ -54,10 +54,17 @@ namespace SenkiSaveEditor
 
         public static bool LoadFromFile(string filename)
         {
-            //byte[] tmpData;
             try
             {
-                data = File.ReadAllBytes(filename);
+                var filebytes = File.ReadAllBytes(filename);
+                var signature = BitConverter.ToInt32(filebytes, 0);
+                if (signature != 0x56415323)
+                {
+                    MessageBox.Show("Missing #SAV identifier.\n\nIf you think this is the correct file, make sure it has been decrypted first.",
+                        "Invalid file", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return false;
+                }
+                data = filebytes;
                 return true;
             }
             catch(Exception ex)

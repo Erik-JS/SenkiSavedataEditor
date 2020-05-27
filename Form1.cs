@@ -116,7 +116,8 @@ namespace SenkiSaveEditor
             openFileDialog1.Filter = "SAVEDATA|SAVEDATA|*.*|*.*";
             if (openFileDialog1.ShowDialog() != DialogResult.OK)
                 return;
-            Savedata.LoadFromFile(openFileDialog1.FileName);
+            if (!Savedata.LoadFromFile(openFileDialog1.FileName))
+                return;
             _savedatafile = openFileDialog1.FileName;
             saveAsToolStripMenuItem.Enabled = true;
             saveToolStripMenuItem.Enabled = true;
